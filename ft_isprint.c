@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akorzhov <akorzhov@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 10:14:54 by akorzhov          #+#    #+#             */
-/*   Updated: 2025/05/13 10:15:28 by akorzhov         ###   ########.fr       */
+/*   Created: 2025/05/13 11:12:53 by akorzhov          #+#    #+#             */
+/*   Updated: 2025/05/13 11:15:16 by akorzhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-#define LIBFT_H
+int	ft_isprint(char c)
+{
+	unsigned char	res;
 
-#include <stdio.h>
-
-int	ft_strlen(const char *s);
-#endif
+	res = (unsigned char)c;
+	if (res < 32 || res > 126)
+		return (0);
+	return (1);
+}

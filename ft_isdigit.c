@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akorzhov <akorzhov@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 10:14:54 by akorzhov          #+#    #+#             */
-/*   Updated: 2025/05/13 10:15:28 by akorzhov         ###   ########.fr       */
+/*   Created: 2025/05/13 10:46:09 by akorzhov          #+#    #+#             */
+/*   Updated: 2025/05/13 10:47:17 by akorzhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-#define LIBFT_H
-
-#include <stdio.h>
-
-int	ft_strlen(const char *s);
-#endif
+int	ft_isdigit(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}

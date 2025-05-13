@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akorzhov <akorzhov@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 10:14:54 by akorzhov          #+#    #+#             */
-/*   Updated: 2025/05/13 10:15:28 by akorzhov         ###   ########.fr       */
+/*   Created: 2025/05/13 11:02:52 by akorzhov          #+#    #+#             */
+/*   Updated: 2025/05/13 11:09:16 by akorzhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-#define LIBFT_H
+int	ft_isascii(char c)
+{
+	unsigned char	res;
 
-#include <stdio.h>
-
-int	ft_strlen(const char *s);
-#endif
+	res = (unsigned char)c;
+	if (res >= 0 && res <= 127)
+		return (1);
+	return (0);
+}
