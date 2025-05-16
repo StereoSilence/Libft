@@ -20,6 +20,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	if (!*little)
 		return ((char *)big);
 	little_len = ft_strlen(little);
+	if (little_len == 0)
+        return ((char *)big);
+    if (len < little_len)
+        return (NULL);
 	while (*big && len > little_len)
 	{
 		i = 0;
