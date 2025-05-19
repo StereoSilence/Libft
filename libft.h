@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akorzhov <akorzhov@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: akorzhov <akorzhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:14:54 by akorzhov          #+#    #+#             */
-/*   Updated: 2025/05/14 18:02:24 by akorzhov         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:57:13 by akorzhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <unistd.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
 # include <limits.h>
@@ -28,7 +29,7 @@ int		ft_isascii(int c);
 
 int		ft_isprint(int c);
 
-int		ft_strlen(const char *s);
+size_t	ft_strlen(const char *s);
 
 void	*ft_memset(void *s, int c, size_t n);
 
