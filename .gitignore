@@ -1,0 +1,39 @@
+# === Compiled files ===
+*.o
+*.a
+a.out
+libft
+libft_tests
+
+# === Build folders ===
+build/
+bin/
+obj/
+
+# === Editor backup files ===
+*~
+*.swp
+*.swo
+*.bak
+
+# === VS Code ===
+.vscode/
+*.code-workspace
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === Logs / temp ===
+*.log
+*.tmp
+
+# === Test output ===
+test_output/
+*.out
+
+# === Docker / CI cache ===
+.francinette/
+__pycache__/
+*.pyc
+
