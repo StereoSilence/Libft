@@ -4,6 +4,7 @@
 a.out
 libft
 libft_tests
+main.c
 
 # === Build folders ===
 build/

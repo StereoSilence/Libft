@@ -6,7 +6,7 @@
 /*   By: akorzhov <akorzhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:14:54 by akorzhov          #+#    #+#             */
-/*   Updated: 2025/05/19 21:57:13 by akorzhov         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:10:04 by akorzhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-
-void	*ft_memmove(void *dest, const void *src, size_t n);
 
 void	*ft_memmove(void *dest, const void *src, size_t n);
 
