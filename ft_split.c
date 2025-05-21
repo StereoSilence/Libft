@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akorzhov <akorzhov@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: akorzhov <akorzhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:26:13 by akorzhov          #+#    #+#             */
-/*   Updated: 2025/05/15 20:40:20 by akorzhov         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:13:28 by akorzhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*ft_copy_word(char const *s, size_t len)
 	char	*res;
 	size_t	i;
 
-	res = malloc(sizeof(char) * (len + 1));
+	res = (char *)malloc(sizeof(char) * (len + 1));
 	if (res == NULL)
 		return (NULL);
 	i = 0;

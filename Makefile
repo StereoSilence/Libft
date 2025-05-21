@@ -6,7 +6,7 @@
 #    By: akorzhov <akorzhov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 10:16:03 by akorzhov          #+#    #+#              #
-#    Updated: 2025/05/19 22:25:58 by akorzhov         ###   ########.fr        #
+#    Updated: 2025/05/21 16:36:27 by akorzhov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME = libft.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+AR = ar rcs
+RM = rm -f
 
 SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c \
@@ -23,17 +25,27 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 	ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
 
-OBJ = $(SRC:.c=.o)
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c ft_lstdelone.c \
+	ft_lstclear.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstsize.c
 
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+OBJ = $(SRC:.c=.o)
+BONUS_OBJ = $(BONUS:.c=.o)
 
 all: $(NAME)
 
+$(NAME): $(OBJ)
+	$(AR) $(NAME) $(OBJ)
+
+bonus: $(NAME) $(BONUS_OBJ)
+	$(AR) $(NAME) $(BONUS_OBJ)
+
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJ) $(BONUS_OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
