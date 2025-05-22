@@ -6,7 +6,7 @@
 /*   By: akorzhov <akorzhov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:04:13 by akorzhov          #+#    #+#             */
-/*   Updated: 2025/05/20 12:32:29 by akorzhov         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:55:52 by akorzhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,26 @@ char	map_func(unsigned int i, char c)
 void	iter_func(unsigned int i, char *c)
 {
 	if (i % 2) *c = '_';
+}
+
+// Helper for ft_lstdelone test
+void del_func(void *content) {
+    printf("del_func called for: %s\n", (char *)content);
+    free(content);
+}
+
+// Helper for ft_lstiter test
+void iter_func_lst(void *content) {
+    char *s = (char *)content;
+    s[0] += 1;
+}
+
+// Helper for ft_lstmap test
+void *map_func_lst(void *content) {
+    char *s = (char *)content;
+    char *dup = strdup(s);
+    if (dup && dup[0] >= 'a' && dup[0] <= 'z') dup[0] -= 32;
+    return dup;
 }
 
 int	main(void)
@@ -177,6 +197,114 @@ int	main(void)
 	char *itoa_str = ft_itoa(-12345);
 	printf("ft_itoa(-12345): %s\n", itoa_str);
 	free(itoa_str);
+
+	printf("\n=== BONUS ===\n");
+
+	printf("\n=== ft_lstnew ===\n");
+	t_list *test = ft_lstnew("hello");
+	printf("content: ft_lstnew('hello')%s\n", (char *)test->content);
+	printf("next: %p\n", test->next);
+
+	printf("\n=== ft_lstadd_front ===\n");
+	t_list *new_node = ft_lstnew("world");
+	ft_lstadd_front(&test, new_node);
+
+	// Custom tests for ft_lstadd_front
+	printf("\n=== ft_lstadd_front ===\n");
+	// Create three nodes
+	t_list *head = ft_lstnew("first");
+	t_list *node2 = ft_lstnew("second");
+	t_list *node3 = ft_lstnew("third");
+	// Add node2 to front
+	ft_lstadd_front(&head, node2);
+	// Add node3 to front
+	ft_lstadd_front(&head, node3);
+	// Print list contents
+	t_list *cur = head;
+	int idx = 0;
+	while (cur) {
+	    printf("Node %d: %s\n", idx++, (char *)cur->content);
+	    cur = cur->next;
+	}
+	// Free list
+	t_list *tmp;
+	cur = head;
+	while (cur) {
+	    tmp = cur->next;
+	    free(cur);
+	    cur = tmp;
+	}
+
+	printf("\n=== ft_lstsize & ft_lstadd_back ===\n");
+	t_list *size_head = ft_lstnew("one");
+	ft_lstadd_back(&size_head, ft_lstnew("two"));
+	ft_lstadd_back(&size_head, ft_lstnew("three"));
+	int size = ft_lstsize(size_head);
+	printf("List size (should be 3): %d\n", size);
+	// Free list
+	t_list *tmp2;
+	t_list *cur2 = size_head;
+	while (cur2) {
+	    tmp2 = cur2->next;
+	    free(cur2);
+	    cur2 = tmp2;
+	}
+
+	printf("\n=== ft_lstlast ===\n");
+	t_list *last_head = ft_lstnew("alpha");
+	ft_lstadd_back(&last_head, ft_lstnew("beta"));
+	ft_lstadd_back(&last_head, ft_lstnew("gamma"));
+	t_list *last = ft_lstlast(last_head);
+	if (last)
+	    printf("Last node content (should be 'gamma'): %s\n", (char *)last->content);
+	else
+	    printf("List is empty!\n");
+	// Free list
+	t_list *tmp3;
+	t_list *cur3 = last_head;
+	while (cur3) {
+	    tmp3 = cur3->next;
+	    free(cur3);
+	    cur3 = tmp3;
+	}
+
+	printf("\n=== ft_lstdelone ===\n");
+	t_list *del_node = ft_lstnew(ft_strdup("to be deleted"));
+	printf("Before del: %s\n", (char *)del_node->content);
+	ft_lstdelone(del_node, del_func);
+	printf("Node deleted (should not print content)\n");
+
+	printf("\n=== ft_lstclear ===\n");
+	t_list *clear_head = ft_lstnew(ft_strdup("node1"));
+	ft_lstadd_back(&clear_head, ft_lstnew(ft_strdup("node2")));
+	ft_lstadd_back(&clear_head, ft_lstnew(ft_strdup("node3")));
+	printf("Before clear, first node: %s\n", (char *)clear_head->content);
+	ft_lstclear(&clear_head, del_func);
+	if (clear_head == NULL)
+	    printf("List cleared (head is NULL)\n");
+	else
+	    printf("List not cleared!\n");
+
+	printf("\n=== ft_lstiter ===\n");
+	t_list *iter_head = ft_lstnew(ft_strdup("A"));
+	ft_lstadd_back(&iter_head, ft_lstnew(ft_strdup("B")));
+	ft_lstadd_back(&iter_head, ft_lstnew(ft_strdup("C")));
+	printf("Before iter: %s, %s, %s\n", (char *)iter_head->content, (char *)iter_head->next->content, (char *)iter_head->next->next->content);
+	ft_lstiter(iter_head, iter_func_lst);
+	printf("After iter: %s, %s, %s\n", (char *)iter_head->content, (char *)iter_head->next->content, (char *)iter_head->next->next->content);
+	ft_lstclear(&iter_head, del_func);
+
+	printf("\n=== ft_lstmap ===\n");
+	t_list *map_head = ft_lstnew(ft_strdup("foo"));
+	ft_lstadd_back(&map_head, ft_lstnew(ft_strdup("bar")));
+	ft_lstadd_back(&map_head, ft_lstnew(ft_strdup("baz")));
+	t_list *mapped_list = ft_lstmap(map_head, map_func_lst, del_func);
+	if (mapped_list && mapped_list->next && mapped_list->next->next)
+        printf("Mapped list: %s, %s, %s\n", (char *)mapped_list->content, (char *)mapped_list->next->content, (char *)mapped_list->next->next->content);
+    else
+        printf("Mapped list is incomplete or NULL!\n");
+    ft_lstclear(&map_head, del_func);
+    ft_lstclear(&mapped_list, del_func);
 
 	return (0);
 }
